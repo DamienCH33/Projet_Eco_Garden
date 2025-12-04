@@ -1,0 +1,22 @@
+parameters:
+    openweather_api_key: '%env(OPENWEATHER_API_KEY)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    App\Controller\Api\UserController:
+        arguments:
+            $openweatherApiKey: '%openweather_api_key%'
+        public: true
+
+    App\Controller\Api\WeatherController:
+        arguments:
+            $openweatherApiKey: '%openweather_api_key%'
+        public: true
