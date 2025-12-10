@@ -19,11 +19,11 @@ final class AdviceController extends AbstractController
     public function __construct(private EntityManagerInterface $em, private AdviceFactory $adviceFactory) {}
 
     #[Route('/{month}', name: 'api_advice_by_month', methods: ['GET'], requirements: ['month' => '\d+'])]
-    #[IsGranted('ROLE_USER')]    
+    #[IsGranted('ROLE_USER')]
     /**
      * Affiche les conseils pour un mois donné
      *
-     * @param  mixed $month
+     * @param  int $month
      * @return JsonResponse
      */
     public function getAdvicesByMonth(int $month): JsonResponse
@@ -51,7 +51,7 @@ final class AdviceController extends AbstractController
     }
 
     #[Route('/', name: 'api_advice_current_month', methods: ['GET'])]
-    #[IsGranted('ROLE_USER')]    
+    #[IsGranted('ROLE_USER')]
     /**
      * Affiche les conseils pour le mois en cours
      *
@@ -83,7 +83,7 @@ final class AdviceController extends AbstractController
     }
 
     #[Route('/', name: 'api_advice_create', methods: ['POST'])]
-    #[IsGranted('ROLE_ADMIN')]    
+    #[IsGranted('ROLE_ADMIN')]
     /**
      * Crée un nouveau conseil
      *
@@ -117,7 +117,7 @@ final class AdviceController extends AbstractController
     }
 
     #[Route('/{id}', name: 'api_advice_update', methods: ['PUT'])]
-    #[IsGranted('ROLE_ADMIN')]    
+    #[IsGranted('ROLE_ADMIN')]
     /**
      * Met à jour un conseil existant
      *
@@ -147,7 +147,7 @@ final class AdviceController extends AbstractController
                 'content' => $advice->getContent(),
                 'month' => $advice->getMonth(),
             ],
-        ], Response::HTTP_OK);
+        ], Response::HTTP_CREATED);
     }
 
     #[Route('/{id}', name: 'api_advice_delete', methods: ['DELETE'])]
@@ -165,7 +165,7 @@ final class AdviceController extends AbstractController
 
         return $this->json(
             ['status' => 'success', 'message' => 'Conseil supprimé avec succès'],
-            Response::HTTP_OK
+            Response::HTTP_NO_CONTENT
         );
     }
 }

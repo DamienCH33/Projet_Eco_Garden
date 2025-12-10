@@ -119,7 +119,7 @@ class UserController extends AbstractController
                 'country' => $user->getCity()?->getCountry(),
                 'roles' => $user->getRoles(),
             ],
-        ], Response::HTTP_OK);
+        ], Response::HTTP_CREATED);
     }
 
     #[Route('/{id}', name: 'api_user_delete', methods: ['DELETE'])]
@@ -145,6 +145,6 @@ class UserController extends AbstractController
         return $this->json([
             'status' => 'success',
             'message' => 'Utilisateur supprimé avec succès',
-        ], Response::HTTP_OK);
+        ], Response::HTTP_NO_CONTENT);
     }
 }
