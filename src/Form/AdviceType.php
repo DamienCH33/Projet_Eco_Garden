@@ -19,11 +19,11 @@ class AdviceType extends AbstractType
             ->add('content', TextareaType::class, [
                 'constraints' => [
                     new Assert\NotBlank([
-                        'message' => 'Le contenu du conseil est obligatoire.'
+                        'message' => 'Le contenu du conseil est obligatoire.',
                     ]),
                     new Assert\Length([
                         'max' => 1000,
-                        'maxMessage' => 'Le contenu ne doit pas dépasser {{ limit }} caractères.'
+                        'maxMessage' => 'Le contenu ne doit pas dépasser {{ limit }} caractères.',
                     ]),
                 ],
             ])
@@ -31,8 +31,9 @@ class AdviceType extends AbstractType
                 'entry_type' => IntegerType::class,
                 'allow_add' => true,
                 'constraints' => [
-                    new Assert\NotBlank([
-                        'message' => 'Veuillez indiquer au moins un mois.'
+                    new Assert\Count([
+                        'min' => 1,
+                        'minMessage' => 'Veuillez indiquer au moins un mois.',
                     ]),
                     new Assert\All([
                         new Assert\Range([
@@ -55,6 +56,7 @@ class AdviceType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Advice::class,
             'csrf_protection' => false,
+            'allow_extra_fields' => false,
         ]);
     }
 }
