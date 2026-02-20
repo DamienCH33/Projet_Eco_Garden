@@ -7,35 +7,46 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdviceRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Advice
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(name: 'id', type: Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ORM\Column(name: 'content', type: Types::TEXT)]
-    private ?string $content = null;
+    #[ORM\Column(type: Types::TEXT)]
+    private string $content;
 
-    #[ORM\Column(name: 'month', type: Types::JSON)]
+    /**
+     * @var int[]
+     */
+    #[ORM\Column(type: Types::JSON)]
     private array $month = [];
 
-    #[ORM\Column('created_at', type: Types::DATETIME_IMMUTABLE, nullable: false)]
-    private ?\DateTimeInterface $createdAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column('update_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updateAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
-        $this->updateAt = new \DateTimeImmutable();
     }
+
+    #[ORM\PreUpdate]
+    public function updateTimestamp(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -47,38 +58,37 @@ class Advice
         return $this;
     }
 
+    /**
+     * @return int[]
+     */
     public function getMonth(): array
     {
         return $this->month;
     }
 
-    public function setMonth(array $month): static
+    /**
+     * @param int[] $months
+     */
+    public function setMonth(array $months): static
     {
-        $this->month = $month;
+        foreach ($months as $month) {
+            if ($month < 1 || $month > 12) {
+                throw new \InvalidArgumentException('Month must be between 1 and 12');
+            }
+        }
+
+        $this->month = array_values(array_unique($months));
 
         return $this;
     }
-    public function getCreatedAt(): ?\DateTimeImmutable
+
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdateAt(): ?\DateTimeImmutable
-    {
-        return $this->updateAt;
-    }
-
-    public function setUpdateAt(\DateTimeImmutable $updateAt): static
-    {
-        $this->updateAt = $updateAt;
-
-        return $this;
+        return $this->updatedAt;
     }
 }
