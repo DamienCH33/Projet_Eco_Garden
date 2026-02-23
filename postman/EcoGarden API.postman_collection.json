@@ -1,0 +1,281 @@
+{
+  "info": {
+    "_postman_id": "35b366ef-e156-4e4c-aed8-72144f86da42",
+    "name": "EcoGarden API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50263474",
+    "_collection_link": "https://go.postman.co/collection/50263474-35b366ef-e156-4e4c-aed8-72144f86da42?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let json = pm.response.json();\r",
+                  "pm.environment.set(\"token\", json.token);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"toto@test.fr\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}auth",
+              "host": [
+                "{{base_url}}auth"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"demo@test.fr\",\r\n  \"password\": \"password123\",\r\n  \"postalCode\": \"33100\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}user",
+              "host": [
+                "{{base_url}}user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update user",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"postalCode\": \"75001\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}user/9",
+              "host": [
+                "{{base_url}}user"
+              ],
+              "path": [
+                "9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete user",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}user/9",
+              "host": [
+                "{{base_url}}user"
+              ],
+              "path": [
+                "9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "See user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}user/me",
+              "host": [
+                "{{base_url}}user"
+              ],
+              "path": [
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Advice",
+      "item": [
+        {
+          "name": "Conseil par mois",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}advice/5",
+              "host": [
+                "{{base_url}}advice"
+              ],
+              "path": [
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Conseil du mois en courant",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}advice",
+              "host": [
+                "{{base_url}}advice"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create conseil",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"content\": \"Conseil Postman Demo\",\r\n  \"month\": [6]\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}advice/",
+              "host": [
+                "{{base_url}}advice"
+              ],
+              "path": [
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update conseil",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"content\": \"Conseil modifié depuis Postman\",\r\n  \"month\": [6]\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}advice/20",
+              "host": [
+                "{{base_url}}advice"
+              ],
+              "path": [
+                "20"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete conseil",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}advice/20",
+              "host": [
+                "{{base_url}}advice"
+              ],
+              "path": [
+                "20"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NzE0MTY5OTEsImV4cCI6MTc3MTQyMDU5MSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InRvdG9AdGVzdC5mciJ9.ao3g_0xjwk2d4xWZe3ehmuPJTiEB5gE9mj-Je8bdFAJYlQ55frBL_9So_yXPBwiM4-rM02mHVw7X2TQ2QYQVmh4SqLdRSNL2LaIfi39cPEvXIi7rBgcZfyMMuuyQxtyFK0gYnZc66-vl5bnp0AVEV1W0wQJn7vx2QzL7WOPQYZVc8pkGUdYe6I4tQ5gSYUhIKPOX-8Rtx4t3oEW2w79wRVgb9yX_dgnxtvSmtrZIl7ufHCiPCgTSuiRyCK8uR0oWN8RFBPolAL1wi2TD26qECMR8EWoXYzkUwBNhviF6MkzXXHJhwd3B3W8swwYq_fxO1MQz0VMNm1Ps2TUSdFBZ2rnOKZJP_yt1fTpTCrNoxY3mupVYF9QP0abEGetbULbC-3Sp30in9NoFaFu1gcaoDhCdncmubxye0ZeeKdC6YfQLB1cxyBK-Lg0SQnpaRtuA8SVSVtCrigExijx_zPNA2ruD8iiuYUrZXTM9DPc-PKDyfzq8v87L5XrIkNWsRt1yhGirXwL3LM52vo5iabshmHQuEYJ6nnW8HonlYOdK15SnTjFsQ64NpnXnJrP8IWL-yl6Z6ge3HVLLf5UGlWsDylibfMcJZFJmmPdqxOmAs86UJ-XYO8uME3NvxJXNUuR9hkJQvywvDboal4Fsh4Z2o1vMfxkOkxDSoen7nB-gO_M",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
