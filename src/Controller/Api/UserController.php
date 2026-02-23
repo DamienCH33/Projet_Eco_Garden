@@ -4,147 +4,141 @@ namespace App\Controller\Api;
 
 use App\Entity\User;
 use App\Factory\UserFactory;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UserRepository;
+use App\Response\ApiResponse;
+use App\Transformer\UserTransformer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[Route('/user')]
 class UserController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $em,
+        private UserRepository $userRepository,
+        private ApiResponse $apiResponse,
         private UserPasswordHasherInterface $passwordHasher,
         private UserFactory $userFactory,
         private string $openweatherApiKey,
-    ) {}
+        private UserTransformer $transformer,
+    ) {
+    }
 
-    #[Route('', name: 'api_user_create', methods: ['POST'])]    
-    /**
-     * crée un nouvel utilisateur
-     *
-     * @param  mixed $request
-     * @param  mixed $client
-     * @param  mixed $validator
-     * @return JsonResponse
-     */
-    public function createUser(Request $request, HttpClientInterface $client, ValidatorInterface $validator): JsonResponse
+    #[Route('/me', name: 'api_user_me', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
+    public function me(): JsonResponse
     {
-        try {
-            $user = $this->userFactory->createUserFromRequest($request, $client, $this->openweatherApiKey);
+        /** @var User $user */
+        $user = $this->getUser();
 
-            $errors = $validator->validate($user);
-            if (count($errors) > 0) {
-                $errorMessages = [];
-                foreach ($errors as $error) {
-                    $errorMessages[] = $error->getMessage();
-                }
+        return $this->apiResponse->success(
+            $this->transformer->transform($user),
+            'Utilisateur récupéré'
+        );
+    }
 
-                return new JsonResponse(['errors' => $errorMessages], Response::HTTP_BAD_REQUEST);
-            }
+    #[Route('', name: 'api_user_create', methods: ['POST'])]
+    public function createUser(
+        Request $request,
+        HttpClientInterface $client,
+        ValidatorInterface $validator,
+    ): JsonResponse {
+        $user = $this->userFactory->createUserFromRequest(
+            $request,
+            $client,
+            $this->openweatherApiKey
+        );
 
-            $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());
-            $user->setPassword($hashedPassword);
-            $user->setRoles(['ROLE_USER']);
+        $errors = $validator->validate($user);
 
-            $this->em->persist($user);
-            $this->em->flush();
+        if (\count($errors) > 0) {
+            $messages = array_map(
+                static fn ($e) => $e->getMessage(),
+                iterator_to_array($errors)
+            );
 
-            return $this->json([
-                'status' => 'success',
-                'message' => 'Utilisateur créé avec succès',
-                'user' => [
-                    'id' => $user->getId(),
-                    'email' => $user->getEmail(),
-                    'postalCode' => $user->getPostalCode(),
-                    'roles' => $user->getRoles(),
-                ],
-            ], Response::HTTP_CREATED);
-        } catch (\Exception $e) {
-            return $this->json([
-                'status' => 'error',
-                'message' => $e->getMessage(),
-            ], Response::HTTP_BAD_REQUEST);
+            return $this->apiResponse->error(
+                implode(', ', $messages),
+                Response::HTTP_BAD_REQUEST
+            );
         }
+
+        $user->setPassword(
+            $this->passwordHasher->hashPassword($user, $user->getPassword())
+        );
+
+        $user->setRoles(['ROLE_USER']);
+
+        $this->userRepository->save($user);
+
+        return $this->apiResponse->success(
+            $this->transformer->transform($user),
+            'Utilisateur créé avec succès',
+            Response::HTTP_CREATED
+        );
     }
 
     #[Route('/{id}', name: 'api_user_update', methods: ['PUT'])]
-    #[IsGranted('ROLE_ADMIN')]    
-    /**
-     * met à jour un utilisateur existant
-     *
-     * @param  mixed $request
-     * @param  mixed $user
-     * @param  mixed $validator
-     * @param  mixed $client
-     * @return JsonResponse
-     */
-    public function updateUser(Request $request, User $user, ValidatorInterface $validator, HttpClientInterface $client): JsonResponse
-    {
-        $this->userFactory->updateUserFromRequest($user, $request, $client, $this->openweatherApiKey);
+    #[IsGranted('ROLE_ADMIN')]
+    public function updateUser(
+        Request $request,
+        User $user,
+        ValidatorInterface $validator,
+        HttpClientInterface $client,
+    ): JsonResponse {
+        $this->userFactory->updateUserFromRequest(
+            $user,
+            $request,
+            $client,
+            $this->openweatherApiKey
+        );
 
         $errors = $validator->validate($user);
-        if (count($errors) > 0) {
-            $errorMessages = [];
-            foreach ($errors as $error) {
-                $errorMessages[] = $error->getMessage();
-            }
 
-            return new JsonResponse(['errors' => $errorMessages], Response::HTTP_BAD_REQUEST);
+        if (\count($errors) > 0) {
+            $messages = array_map(
+                static fn ($e) => $e->getMessage(),
+                iterator_to_array($errors)
+            );
+
+            return $this->apiResponse->error(
+                implode(', ', $messages),
+                Response::HTTP_BAD_REQUEST
+            );
         }
 
-        $data = json_decode($request->getContent(), true);
+        $data = $request->toArray();
+
         if (!empty($data['password'])) {
-            $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());
-            $user->setPassword($hashedPassword);
+            $user->setPassword(
+                $this->passwordHasher->hashPassword($user, $user->getPassword())
+            );
         }
 
-        $user->setUpdateAt(new \DateTimeImmutable());
-        $this->em->flush();
+        $this->userRepository->save($user);
 
-        return $this->json([
-            'status' => 'success',
-            'message' => 'Utilisateur mis à jour avec succès',
-            'user' => [
-                'id' => $user->getId(),
-                'email' => $user->getEmail(),
-                'postalCode' => $user->getCity()?->getPostalCode(),
-                'ville' => $user->getCity()?->getName(),
-                'country' => $user->getCity()?->getCountry(),
-                'roles' => $user->getRoles(),
-            ],
-        ], Response::HTTP_CREATED);
+        return $this->apiResponse->success(
+            $this->transformer->transform($user),
+            'Utilisateur mis à jour avec succès',
+            Response::HTTP_OK
+        );
     }
 
     #[Route('/{id}', name: 'api_user_delete', methods: ['DELETE'])]
-    #[IsGranted('ROLE_ADMIN')]    
-    /**
-     * supprime un utilisateur existant
-     *
-     * @param  mixed $user
-     * @return JsonResponse
-     */
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteUser(User $user): JsonResponse
     {
-        if (!$user) {
-            return new JsonResponse([
-                'status' => 'error',
-                'message' => 'Utilisateur introuvable.'
-            ], Response::HTTP_NOT_FOUND);
-        }
+        $this->userRepository->remove($user);
 
-        $this->em->remove($user);
-        $this->em->flush();
-
-        return $this->json([
-            'status' => 'success',
-            'message' => 'Utilisateur supprimé avec succès',
-        ], Response::HTTP_NO_CONTENT);
+        return $this->apiResponse->success(
+            null,
+            'Utilisateur supprimé avec succès'
+        );
     }
 }
