@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\wamp64\www\Projet_Eco_Garden\src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css?v=12.5.0" rel="stylesheet" type="text/css">
+  <link href="_css/billboard.min.css?v=12.5.0" rel="stylesheet" type="text/css">
+  <link href="_css/style.css?v=12.5.0" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">C:\wamp64\www\Projet_Eco_Garden\src</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classesCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/Api/SecurityController.php.html#9">App\Controller\Api\SecurityController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/CityFactory.php.html#9">App\Factory\CityFactory</a></td><td class="text-right">25%</td></tr>
+       <tr><td><a href="Entity/City.php.html#9">App\Entity\City</a></td><td class="text-right">54%</td></tr>
+       <tr><td><a href="Controller/Api/UserController.php.html#20">App\Controller\Api\UserController</a></td><td class="text-right">61%</td></tr>
+       <tr><td><a href="Controller/Api/WeatherController.php.html#16">App\Controller\Api\WeatherController</a></td><td class="text-right">71%</td></tr>
+       <tr><td><a href="Controller/Api/AdviceController.php.html#18">App\Controller\Api\AdviceController</a></td><td class="text-right">78%</td></tr>
+       <tr><td><a href="Entity/Advice.php.html#9">App\Entity\Advice</a></td><td class="text-right">78%</td></tr>
+       <tr><td><a href="EventSubscriber/ExceptionSubscriber.php.html#13">App\EventSubscriber\ExceptionSubscriber</a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Factory/AdviceFactory.php.html#10">App\Factory\AdviceFactory</a></td><td class="text-right">83%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Factory/AdviceFactory.php.html#10">App\Factory\AdviceFactory</a></td><td class="text-right">83.9%</td><td class="text-right">23</td><td class="text-right">25</td></tr>
+       <tr><td><a href="Factory/CityFactory.php.html#9">App\Factory\CityFactory</a></td><td class="text-right">25.0%</td><td class="text-right">5</td><td class="text-right">15</td></tr>
+       <tr><td><a href="Controller/Api/AdviceController.php.html#18">App\Controller\Api\AdviceController</a></td><td class="text-right">78.5%</td><td class="text-right">12</td><td class="text-right">13</td></tr>
+       <tr><td><a href="Entity/Advice.php.html#9">App\Entity\Advice</a></td><td class="text-right">78.6%</td><td class="text-right">12</td><td class="text-right">13</td></tr>
+       <tr><td><a href="Controller/Api/UserController.php.html#20">App\Controller\Api\UserController</a></td><td class="text-right">61.9%</td><td class="text-right">8</td><td class="text-right">11</td></tr>
+       <tr><td><a href="Controller/Api/WeatherController.php.html#16">App\Controller\Api\WeatherController</a></td><td class="text-right">71.8%</td><td class="text-right">5</td><td class="text-right">5</td></tr>
+       <tr><td><a href="EventSubscriber/ExceptionSubscriber.php.html#13">App\EventSubscriber\ExceptionSubscriber</a></td><td class="text-right">81.2%</td><td class="text-right">5</td><td class="text-right">5</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2 style="margin-top: 3rem;">Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodsCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/Api/SecurityController.php.html#11"><abbr title="App\Controller\Api\SecurityController::login">login</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/Api/UserController.php.html#33"><abbr title="App\Controller\Api\UserController::me">me</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Advice.php.html#85"><abbr title="App\Entity\Advice::getCreatedAt">getCreatedAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Advice.php.html#90"><abbr title="App\Entity\Advice::getUpdatedAt">getUpdatedAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/City.php.html#35"><abbr title="App\Entity\City::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/City.php.html#40"><abbr title="App\Entity\City::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/City.php.html#52"><abbr title="App\Entity\City::getPostalCode">getPostalCode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/City.php.html#64"><abbr title="App\Entity\City::getCountry">getCountry</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/City.php.html#76"><abbr title="App\Entity\City::__toString">__toString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EventSubscriber/ExceptionSubscriber.php.html#21"><abbr title="App\EventSubscriber\ExceptionSubscriber::getSubscribedEvents">getSubscribedEvents</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/CityFactory.php.html#19"><abbr title="App\Factory\CityFactory::findOrCreateFromPostalCode">findOrCreateFromPostalCode</abbr></a></td><td class="text-right">21%</td></tr>
+       <tr><td><a href="Controller/Api/UserController.php.html#87"><abbr title="App\Controller\Api\UserController::updateUser">updateUser</abbr></a></td><td class="text-right">59%</td></tr>
+       <tr><td><a href="Controller/Api/AdviceController.php.html#58"><abbr title="App\Controller\Api\AdviceController::getAdvicesForCurrentMonth">getAdvicesForCurrentMonth</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Controller/Api/AdviceController.php.html#84"><abbr title="App\Controller\Api\AdviceController::createAdvice">createAdvice</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Controller/Api/AdviceController.php.html#116"><abbr title="App\Controller\Api\AdviceController::updateAdvice">updateAdvice</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Controller/Api/WeatherController.php.html#30"><abbr title="App\Controller\Api\WeatherController::byPostalCode">byPostalCode</abbr></a></td><td class="text-right">67%</td></tr>
+       <tr><td><a href="Controller/Api/UserController.php.html#46"><abbr title="App\Controller\Api\UserController::createUser">createUser</abbr></a></td><td class="text-right">68%</td></tr>
+       <tr><td><a href="Entity/Advice.php.html#72"><abbr title="App\Entity\Advice::setMonth">setMonth</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Factory/AdviceFactory.php.html#22"><abbr title="App\Factory\AdviceFactory::createAdviceFromRequest">createAdviceFromRequest</abbr></a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="Factory/AdviceFactory.php.html#62"><abbr title="App\Factory\AdviceFactory::updateAdviceFromRequest">updateAdviceFromRequest</abbr></a></td><td class="text-right">84%</td></tr>
+       <tr><td><a href="Controller/Api/WeatherController.php.html#76"><abbr title="App\Controller\Api\WeatherController::byUserPostalCode">byUserPostalCode</abbr></a></td><td class="text-right">85%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Factory/AdviceFactory.php.html#22"><abbr title="App\Factory\AdviceFactory::createAdviceFromRequest">createAdviceFromRequest</abbr></a></td><td class="text-right">82.4%</td><td class="text-right">12</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Factory/CityFactory.php.html#19"><abbr title="App\Factory\CityFactory::findOrCreateFromPostalCode">findOrCreateFromPostalCode</abbr></a></td><td class="text-right">21.7%</td><td class="text-right">4</td><td class="text-right">11</td></tr>
+       <tr><td><a href="Factory/AdviceFactory.php.html#62"><abbr title="App\Factory\AdviceFactory::updateAdviceFromRequest">updateAdviceFromRequest</abbr></a></td><td class="text-right">84.6%</td><td class="text-right">10</td><td class="text-right">10</td></tr>
+       <tr><td><a href="Entity/Advice.php.html#72"><abbr title="App\Entity\Advice::setMonth">setMonth</abbr></a></td><td class="text-right">80.0%</td><td class="text-right">4</td><td class="text-right">4</td></tr>
+       <tr><td><a href="Controller/Api/UserController.php.html#87"><abbr title="App\Controller\Api\UserController::updateUser">updateUser</abbr></a></td><td class="text-right">59.3%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Controller/Api/AdviceController.php.html#58"><abbr title="App\Controller\Api\AdviceController::getAdvicesForCurrentMonth">getAdvicesForCurrentMonth</abbr></a></td><td class="text-right">66.7%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+       <tr><td><a href="Controller/Api/AdviceController.php.html#84"><abbr title="App\Controller\Api\AdviceController::createAdvice">createAdvice</abbr></a></td><td class="text-right">66.7%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+       <tr><td><a href="Controller/Api/AdviceController.php.html#116"><abbr title="App\Controller\Api\AdviceController::updateAdvice">updateAdvice</abbr></a></td><td class="text-right">66.7%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+       <tr><td><a href="Controller/Api/UserController.php.html#46"><abbr title="App\Controller\Api\UserController::createUser">createUser</abbr></a></td><td class="text-right">68.0%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+       <tr><td><a href="Controller/Api/WeatherController.php.html#30"><abbr title="App\Controller\Api\WeatherController::byPostalCode">byPostalCode</abbr></a></td><td class="text-right">67.7%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+       <tr><td><a href="Controller/Api/WeatherController.php.html#76"><abbr title="App\Controller\Api\WeatherController::byUserPostalCode">byUserPostalCode</abbr></a></td><td class="text-right">85.7%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 12.5.0</a> using <a href="https://www.php.net/" target="_top">PHP 8.4.0</a> and <a href="https://phpunit.de/">PHPUnit 12.5.1</a> at Wed Feb 18 11:00:47 CET 2026.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/billboard.pkgd.min.js?v=12.5.0" type="text/javascript"></script>
+  <script type="application/json" id="complexity_class">[[0,1,"Controller\/Api\/SecurityController.php.html#9","App\\Controller\\Api\\SecurityController","2"],[25,5,"Factory\/CityFactory.php.html#9","App\\Factory\\CityFactory","15.55"],[54.54545454545454,8,"Entity\/City.php.html#9","App\\Entity\\City","14.01"],[61.904761904761905,8,"Controller\/Api\/UserController.php.html#20","App\\Controller\\Api\\UserController","11.54"],[71.7948717948718,5,"Controller\/Api\/WeatherController.php.html#16","App\\Controller\\Api\\WeatherController","5.56"],[78.46153846153847,12,"Controller\/Api\/AdviceController.php.html#18","App\\Controller\\Api\\AdviceController","13.44"],[78.57142857142857,12,"Entity\/Advice.php.html#9","App\\Entity\\Advice","13.42"],[81.25,5,"EventSubscriber\/ExceptionSubscriber.php.html#13","App\\EventSubscriber\\ExceptionSubscriber","5.16"],[83.87096774193549,23,"Factory\/AdviceFactory.php.html#10","App\\Factory\\AdviceFactory","25.22"],[97.05882352941177,13,"Factory\/UserFactory.php.html#11","App\\Factory\\UserFactory","13"],[100,17,"Entity\/User.php.html#13","App\\Entity\\User","17"],[100,0,"Kernel.php.html#8","App\\Kernel","0"],[100,3,"Repository\/AbstractRepository.php.html#13","App\\Repository\\AbstractRepository","3"],[100,2,"Repository\/AdviceRepository.php.html#11","App\\Repository\\AdviceRepository","2"],[100,1,"Repository\/CityRepository.php.html#12","App\\Repository\\CityRepository","1"],[100,1,"Repository\/UserRepository.php.html#11","App\\Repository\\UserRepository","1"],[100,2,"Service\/ApiResponse.php.html#8","App\\Service\\ApiResponse","2"],[100,2,"Transformer\/AdviceTransformer.php.html#7","App\\Transformer\\AdviceTransformer","2"],[100,1,"Transformer\/UserTransformer.php.html#7","App\\Transformer\\UserTransformer","1"]]</script>
+  <script type="application/json" id="complexity_method">[[0,1,"Controller\/Api\/SecurityController.php.html#11","App\\Controller\\Api\\SecurityController::login","2"],[0,1,"Controller\/Api\/UserController.php.html#33","App\\Controller\\Api\\UserController::me","2"],[0,1,"Entity\/Advice.php.html#85","App\\Entity\\Advice::getCreatedAt","2"],[0,1,"Entity\/Advice.php.html#90","App\\Entity\\Advice::getUpdatedAt","2"],[0,1,"Entity\/City.php.html#35","App\\Entity\\City::getId","2"],[0,1,"Entity\/City.php.html#40","App\\Entity\\City::getName","2"],[0,1,"Entity\/City.php.html#52","App\\Entity\\City::getPostalCode","2"],[0,1,"Entity\/City.php.html#64","App\\Entity\\City::getCountry","2"],[0,1,"Entity\/City.php.html#76","App\\Entity\\City::__toString","2"],[0,1,"EventSubscriber\/ExceptionSubscriber.php.html#21","App\\EventSubscriber\\ExceptionSubscriber::getSubscribedEvents","2"],[21.73913043478261,4,"Factory\/CityFactory.php.html#19","App\\Factory\\CityFactory::findOrCreateFromPostalCode","11.67"],[59.25925925925925,3,"Controller\/Api\/UserController.php.html#87","App\\Controller\\Api\\UserController::updateUser","3.61"],[66.66666666666666,2,"Controller\/Api\/AdviceController.php.html#58","App\\Controller\\Api\\AdviceController::getAdvicesForCurrentMonth","2.15"],[66.66666666666666,2,"Controller\/Api\/AdviceController.php.html#84","App\\Controller\\Api\\AdviceController::createAdvice","2.15"],[66.66666666666666,2,"Controller\/Api\/AdviceController.php.html#116","App\\Controller\\Api\\AdviceController::updateAdvice","2.15"],[67.74193548387096,2,"Controller\/Api\/WeatherController.php.html#30","App\\Controller\\Api\\WeatherController::byPostalCode","2.13"],[68,2,"Controller\/Api\/UserController.php.html#46","App\\Controller\\Api\\UserController::createUser","2.13"],[80,4,"Entity\/Advice.php.html#72","App\\Entity\\Advice::setMonth","4.13"],[82.35294117647058,12,"Factory\/AdviceFactory.php.html#22","App\\Factory\\AdviceFactory::createAdviceFromRequest","12.79"],[84.61538461538461,10,"Factory\/AdviceFactory.php.html#62","App\\Factory\\AdviceFactory::updateAdviceFromRequest","10.36"],[85.71428571428571,2,"Controller\/Api\/WeatherController.php.html#76","App\\Controller\\Api\\WeatherController::byUserPostalCode","2.01"],[94.11764705882352,6,"Factory\/UserFactory.php.html#60","App\\Factory\\UserFactory::updateUserFromRequest","6.01"],[100,1,"Controller\/Api\/AdviceController.php.html#21","App\\Controller\\Api\\AdviceController::__construct","1"],[100,4,"Controller\/Api\/AdviceController.php.html#25","App\\Controller\\Api\\AdviceController::getAdvicesByMonth","4"],[100,1,"Controller\/Api\/AdviceController.php.html#149","App\\Controller\\Api\\AdviceController::deleteAdvice","1"],[100,1,"Controller\/Api\/UserController.php.html#23","App\\Controller\\Api\\UserController::__construct","1"],[100,1,"Controller\/Api\/UserController.php.html#133","App\\Controller\\Api\\UserController::deleteUser","1"],[100,1,"Controller\/Api\/WeatherController.php.html#19","App\\Controller\\Api\\WeatherController::__construct","1"],[100,1,"Entity\/Advice.php.html#33","App\\Entity\\Advice::__construct","1"],[100,1,"Entity\/Advice.php.html#38","App\\Entity\\Advice::updateTimestamp","1"],[100,1,"Entity\/Advice.php.html#44","App\\Entity\\Advice::getId","1"],[100,1,"Entity\/Advice.php.html#49","App\\Entity\\Advice::getContent","1"],[100,1,"Entity\/Advice.php.html#54","App\\Entity\\Advice::setContent","1"],[100,1,"Entity\/Advice.php.html#64","App\\Entity\\Advice::getMonth","1"],[100,1,"Entity\/City.php.html#45","App\\Entity\\City::setName","1"],[100,1,"Entity\/City.php.html#57","App\\Entity\\City::setPostalCode","1"],[100,1,"Entity\/City.php.html#69","App\\Entity\\City::setCountry","1"],[100,1,"Entity\/User.php.html#54","App\\Entity\\User::__construct","1"],[100,1,"Entity\/User.php.html#59","App\\Entity\\User::updateTimestamp","1"],[100,1,"Entity\/User.php.html#65","App\\Entity\\User::getId","1"],[100,1,"Entity\/User.php.html#70","App\\Entity\\User::getUserIdentifier","1"],[100,1,"Entity\/User.php.html#75","App\\Entity\\User::eraseCredentials","1"],[100,1,"Entity\/User.php.html#79","App\\Entity\\User::getEmail","1"],[100,1,"Entity\/User.php.html#84","App\\Entity\\User::setEmail","1"],[100,1,"Entity\/User.php.html#94","App\\Entity\\User::getRoles","1"],[100,1,"Entity\/User.php.html#105","App\\Entity\\User::setRoles","1"],[100,1,"Entity\/User.php.html#112","App\\Entity\\User::getPassword","1"],[100,1,"Entity\/User.php.html#117","App\\Entity\\User::setPassword","1"],[100,1,"Entity\/User.php.html#124","App\\Entity\\User::getPostalCode","1"],[100,1,"Entity\/User.php.html#129","App\\Entity\\User::setPostalCode","1"],[100,1,"Entity\/User.php.html#136","App\\Entity\\User::getCreatedAt","1"],[100,1,"Entity\/User.php.html#141","App\\Entity\\User::getUpdatedAt","1"],[100,1,"Entity\/User.php.html#146","App\\Entity\\User::getCity","1"],[100,1,"Entity\/User.php.html#151","App\\Entity\\User::setCity","1"],[100,1,"EventSubscriber\/ExceptionSubscriber.php.html#15","App\\EventSubscriber\\ExceptionSubscriber::__construct","1"],[100,3,"EventSubscriber\/ExceptionSubscriber.php.html#28","App\\EventSubscriber\\ExceptionSubscriber::onKernelException","3"],[100,1,"Factory\/AdviceFactory.php.html#14","App\\Factory\\AdviceFactory::__construct","1"],[100,1,"Factory\/CityFactory.php.html#11","App\\Factory\\CityFactory::__construct","1"],[100,1,"Factory\/UserFactory.php.html#15","App\\Factory\\UserFactory::__construct","1"],[100,6,"Factory\/UserFactory.php.html#24","App\\Factory\\UserFactory::createUserFromRequest","6"],[100,1,"Repository\/AbstractRepository.php.html#18","App\\Repository\\AbstractRepository::__construct","1"],[100,1,"Repository\/AbstractRepository.php.html#26","App\\Repository\\AbstractRepository::save","1"],[100,1,"Repository\/AbstractRepository.php.html#36","App\\Repository\\AbstractRepository::remove","1"],[100,1,"Repository\/AdviceRepository.php.html#13","App\\Repository\\AdviceRepository::__construct","1"],[100,1,"Repository\/AdviceRepository.php.html#21","App\\Repository\\AdviceRepository::findByMonth","1"],[100,1,"Repository\/CityRepository.php.html#14","App\\Repository\\CityRepository::__construct","1"],[100,1,"Repository\/UserRepository.php.html#13","App\\Repository\\UserRepository::__construct","1"],[100,1,"Service\/ApiResponse.php.html#10","App\\Service\\ApiResponse::success","1"],[100,1,"Service\/ApiResponse.php.html#22","App\\Service\\ApiResponse::error","1"],[100,1,"Transformer\/AdviceTransformer.php.html#16","App\\Transformer\\AdviceTransformer::transform","1"],[100,1,"Transformer\/AdviceTransformer.php.html#34","App\\Transformer\\AdviceTransformer::transformCollection","1"],[100,1,"Transformer\/UserTransformer.php.html#17","App\\Transformer\\UserTransformer::transform","1"]]</script>
+  <script type="text/javascript" defer>
+  const barLabels = [
+    '0%',
+    '0-10%',
+    '10-20%',
+    '20-30%',
+    '30-40%',
+    '40-50%',
+    '50-60%',
+    '60-70%',
+    '70-80%',
+    '80-90%',
+    '90-100%',
+    '100%'
+  ];
+  const barConfig = (name, fullName, values) => ({
+    axis: {
+      x: {
+        type: "category",
+        categories: barLabels,
+      },
+      y: {
+        label: {
+          text: `#${name}`,
+          position: 'outer-top',
+        },
+      },
+    },
+    bindto: `#${name}CoverageDistribution`,
+    data: {
+      columns: [
+        [fullName].concat(values),
+      ],
+      colors: {
+        [fullName]: "rgba(69, 114, 167, 0.75)",
+      },
+      type: "bar",
+    },
+    bar: {
+      width: {
+        ratio: 0.9,
+      },
+    },
+    grid: {
+      focus: {
+        show: false,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">Coverage ${barLabels[data[0].x]}</th></tr>
+            <tr><td class="value">${data[0].value} ${name}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  bb.generate(
+    barConfig('classes', "Class Coverage", [1,0,0,1,0,0,1,1,3,2,1,9])
+  );
+  bb.generate(
+    barConfig('methods', "Method Coverage", [10,0,0,1,0,0,1,5,0,4,1,50])
+  );
+
+  const scatterConfig = (name, complexityData) => ({
+    axis: {
+      x: {
+        label: {
+          text: 'Code Coverage (in percent)',
+          position: 'outer-right',
+        },
+        tick: {
+          values: [0, 20, 40, 60, 80, 100],
+        },
+      },
+      y: {
+        label: {
+          text: 'Cyclomatic Complexity',
+          position: 'outer-top',
+        },
+        min: 0,
+        padding: {
+          bottom: 0,
+          top: 5,
+        },
+      },
+    },
+    bindto: `#${name}Complexity`,
+    data: {
+      columns: [
+        ["complexity_x"].concat(complexityData.map(d => d[0])),
+        ["complexity"].concat(complexityData.map(d => d[1])),
+      ],
+      onclick: function(data, element) {
+        window.location = complexityData[data.index][2];
+      },
+      type: "scatter",
+      xs: {
+        "complexity": "complexity_x",
+      },
+    },
+    grid: {
+      focus: {
+        show: true,
+        y: true,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        const coverage = Math.round(data[0].x);
+        const complexity = data[0].value;
+        const targetName = complexityData[data[0].index][3];
+        const crap = complexityData[data[0].index][4];
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">${targetName}</th></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Coverage</td><td class="name">${coverage}%</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Complexity</td><td class="value">${complexity}</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Crap</td><td class="value">${crap}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  const classComplexityData = JSON.parse(document.getElementById('complexity_class').textContent);
+  bb.generate(
+    scatterConfig("class", classComplexityData)
+  );
+  const methodComplexityData = JSON.parse(document.getElementById('complexity_method').textContent);
+  bb.generate(
+    scatterConfig("method", methodComplexityData),
+  );
+  </script>
+ </body>
+</html>
