@@ -4,29 +4,52 @@ namespace App\Factory;
 
 use App\Entity\City;
 use App\Repository\CityRepository;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CityFactory
 {
-    public function __construct(private CityRepository $cityRepository) {}
-    
+    public function __construct(
+        private CityRepository $cityRepository,
+    ) {
+    }
+
     /**
-     * findOrCreate
-     *
-     * @param  mixed $cityName
-     * @param  mixed $postalCode
-     * @return City
+     * Trouve ou crée une ville depuis un code postal.
      */
-    public function findOrCreate(string $cityName, ?string $postalCode = null): City
-    {
-        $cleanName = ucfirst(strtolower(trim($cityName)));
+    public function findOrCreateFromPostalCode(
+        string $postalCode,
+        HttpClientInterface $client,
+        string $apiKey,
+    ): City {
+        $city = $this->cityRepository->findOneBy([
+            'postalCode' => $postalCode,
+        ]);
 
-        $city = $this->cityRepository->findOneBy(['name' => $cleanName]);
-
-        if (!$city) {
-            $city = new City();
-            $city->setName($cleanName);
-            $city->setPostalCode($postalCode);
+        if ($city) {
+            return $city;
         }
+
+        $response = $client->request(
+            'GET',
+            'https://api.openweathermap.org/geo/1.0/zip',
+            [
+                'query' => [
+                    'zip' => $postalCode.',FR',
+                    'appid' => $apiKey,
+                ],
+            ]
+        );
+
+        $result = $response->toArray();
+
+        if (empty($result['name']) || empty($result['country'])) {
+            throw new \Exception('Impossible de récupérer la ville depuis le code postal');
+        }
+
+        $city = new City();
+        $city->setPostalCode($postalCode);
+        $city->setName($result['name']);
+        $city->setCountry($result['country']);
 
         return $city;
     }
