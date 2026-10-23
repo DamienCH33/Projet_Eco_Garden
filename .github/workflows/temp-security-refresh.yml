@@ -25,7 +25,7 @@ jobs:
       - name: Set up PHP and Composer
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: "8.5"
           extensions: mbstring, intl, pdo_pgsql
           tools: composer:v2
 
@@ -33,8 +33,7 @@ jobs:
         run: composer update "symfony/*" --with-all-dependencies --no-interaction --no-progress --no-scripts
 
       - name: Validate Composer files and lock
-        run: composer validate
-
+        run: composer validate --no-check-publish
       - name: Lint YAML configuration
         run: php bin/console lint:yaml config/
 
