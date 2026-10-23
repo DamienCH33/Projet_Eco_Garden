@@ -1,0 +1,73 @@
+name: Temporary Symfony 7.4 security refresh
+
+on:
+  push:
+    branches:
+      - chore/symfony-7.4-security-refresh
+    paths:
+      - "composer.json"
+      - ".github/workflows/temp-security-refresh.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: test
+      APP_SECRET: temporary-ci-secret
+      DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:5432/security_refresh?serverVersion=17&charset=utf8"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP and Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: mbstring, intl, pdo_pgsql
+          tools: composer:v2
+
+      - name: Update Symfony components to supported 7.4 patches
+        run: composer update "symfony/*" --with-all-dependencies --no-interaction --no-progress --no-scripts
+
+      - name: Validate Composer files and lock
+        run: composer validate
+
+      - name: Lint YAML configuration
+        run: php bin/console lint:yaml config/
+
+      - name: Lint Symfony container
+        run: php bin/console lint:container --env=test
+
+      - name: Run PHPUnit when installed
+        run: |
+          if [ -x vendor/bin/phpunit ]; then
+            vendor/bin/phpunit
+          else
+            echo "No PHPUnit binary is configured in this project."
+          fi
+
+      - name: Run PHPStan when installed
+        run: |
+          if [ -x vendor/bin/phpstan ]; then
+            vendor/bin/phpstan analyse --no-progress
+          else
+            echo "No PHPStan binary is configured in this project."
+          fi
+
+      - name: Commit refreshed dependency lock for review
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- composer.lock; then
+            echo "composer.lock is already current"
+          else
+            git add composer.lock
+            git commit -m "chore: refresh Symfony dependencies"
+            git push origin HEAD
+          fi
+
+      - name: Require clean Composer security audit
+        run: composer audit --locked
